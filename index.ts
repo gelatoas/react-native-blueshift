@@ -7,4 +7,8 @@ export const setUserInfo = (userInfo: UserInfo) => {
   Blueshift.setUserInfo(userInfo)
 };
 
+export const log = (eventName: string, params: Object, canBatchThisEvent: boolean) => {
+  Blueshift.trackEvent(eventName, params, canBatchThisEvent)
+};
+
 export default Blueshift;

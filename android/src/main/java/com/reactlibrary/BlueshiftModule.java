@@ -1,5 +1,6 @@
 package com.reactlibrary;
 
+import com.blueshift.Blueshift;
 import com.blueshift.model.UserInfo;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
@@ -41,55 +42,55 @@ public class BlueshiftModule extends ReactContextBaseJavaModule {
         UserInfo blueshiftUserInfo = UserInfo.getInstance(reactContext);
 
         String email = userInfo.getString(EMAIL);
-        if(email != null){
+        if (email != null) {
             blueshiftUserInfo.setEmail(email);
         }
 
         String emailHash = userInfo.getString(EMAIL_HASH);
-        if(emailHash != null){
+        if (emailHash != null) {
             blueshiftUserInfo.setEmailHash(emailHash);
         }
 
         String retailerCustomerId = userInfo.getString(RETAILER_CUSTOMER_ID);
-        if(retailerCustomerId != null){
+        if (retailerCustomerId != null) {
             blueshiftUserInfo.setRetailerCustomerId(retailerCustomerId);
         }
         String name = userInfo.getString(NAME);
-        if(name != null){
+        if (name != null) {
             blueshiftUserInfo.setName(name);
         }
         String firstname = userInfo.getString(FIRSTNAME);
-        if(firstname != null){
+        if (firstname != null) {
             blueshiftUserInfo.setFirstname(firstname);
         }
         String lastname = userInfo.getString(LASTNAME);
-        if(lastname != null){
+        if (lastname != null) {
             blueshiftUserInfo.setLastname(lastname);
         }
         String gender = userInfo.getString(GENDER);
-        if(gender != null){
+        if (gender != null) {
             blueshiftUserInfo.setGender(gender);
         }
-        if(userInfo.hasKey(JOINED_AT)){
+        if (userInfo.hasKey(JOINED_AT)) {
             blueshiftUserInfo.setJoinedAt(userInfo.getInt(JOINED_AT));
         }
         String facebookId = userInfo.getString(FACEBOOK_ID);
-        if(facebookId != null){
+        if (facebookId != null) {
             blueshiftUserInfo.setFacebookId(facebookId);
         }
         String education = userInfo.getString(EDUCATION);
-        if(education != null){
+        if (education != null) {
             blueshiftUserInfo.setEducation(education);
         }
-        if(userInfo.hasKey(UNSUBSCRIBED)){
+        if (userInfo.hasKey(UNSUBSCRIBED)) {
             blueshiftUserInfo.setUnsubscribed(userInfo.getBoolean(UNSUBSCRIBED));
         }
         ReadableMap details = userInfo.getMap(DETAILS);
-        if(details != null){
+        if (details != null) {
             blueshiftUserInfo.setDetails(details.toHashMap());
         }
         ReadableMap dateOfBirth = userInfo.getMap(DATE_OF_BIRTH);
-        if(dateOfBirth != null){
+        if (dateOfBirth != null) {
             blueshiftUserInfo.setDateOfBirth(
                     dateOfBirth.getInt(BIRTH_DAY),
                     dateOfBirth.getInt(BIRTH_MONTH),
@@ -99,4 +100,13 @@ public class BlueshiftModule extends ReactContextBaseJavaModule {
         }
         blueshiftUserInfo.save(reactContext);
     }
+
+    @ReactMethod
+    public void trackEvent(final String eventName,
+                           ReadableMap params,
+                           final boolean canBatchThisEvent) {
+        Blueshift.getInstance(reactContext)
+                .trackEvent(eventName, params.toHashMap(), canBatchThisEvent);
+    }
+
 }
