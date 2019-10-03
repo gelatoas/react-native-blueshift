@@ -131,4 +131,11 @@ public class BlueshiftModule extends ReactContextBaseJavaModule {
                 .identifyUserByDeviceId(advertisingId, details.toHashMap(), canBatchThisEvent);
     }
 
+    @ReactMethod
+    public void trackScreenView(final String screenName,
+                           final boolean canBatchThisEvent) {
+        Blueshift.getInstance(reactContext)
+                .trackScreenView(screenName, canBatchThisEvent);
+    }
+
 }

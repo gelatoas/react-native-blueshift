@@ -15,4 +15,8 @@ export const identify = (details: Object, canBatchThisEvent: boolean) => {
   Blueshift.identify(details, canBatchThisEvent)
 };
 
+export const trackScreenView = (screenName: string, canBatchThisEvent: boolean) => {
+  Blueshift.trackScreenView(screenName, canBatchThisEvent)
+};
+
 export default Blueshift;
