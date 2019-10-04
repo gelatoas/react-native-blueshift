@@ -15,7 +15,6 @@ import java.io.IOException;
 public class BlueshiftModule extends ReactContextBaseJavaModule {
 
     private static final String EMAIL = "email";
-    private static final String EMAIL_HASH = "email_hash";
     private static final String RETAILER_CUSTOMER_ID = "retailer_customer_id";
     private static final String NAME = "name";
     private static final String FIRSTNAME = "firstname";
@@ -50,52 +49,38 @@ public class BlueshiftModule extends ReactContextBaseJavaModule {
         if (email != null) {
             blueshiftUserInfo.setEmail(email);
         }
-
-        String emailHash = userInfo.getString(EMAIL_HASH);
-        if (emailHash != null) {
-            blueshiftUserInfo.setEmailHash(emailHash);
+        if (userInfo.hasKey(RETAILER_CUSTOMER_ID)) {
+            blueshiftUserInfo.setRetailerCustomerId(userInfo.getString(RETAILER_CUSTOMER_ID));
         }
-
-        String retailerCustomerId = userInfo.getString(RETAILER_CUSTOMER_ID);
-        if (retailerCustomerId != null) {
-            blueshiftUserInfo.setRetailerCustomerId(retailerCustomerId);
+        if (userInfo.hasKey(NAME)) {
+            blueshiftUserInfo.setName(userInfo.getString(NAME));
         }
-        String name = userInfo.getString(NAME);
-        if (name != null) {
-            blueshiftUserInfo.setName(name);
+        if (userInfo.hasKey(FIRSTNAME)) {
+            blueshiftUserInfo.setFirstname(userInfo.getString(FIRSTNAME));
         }
-        String firstname = userInfo.getString(FIRSTNAME);
-        if (firstname != null) {
-            blueshiftUserInfo.setFirstname(firstname);
+        if (userInfo.hasKey(LASTNAME)) {
+            blueshiftUserInfo.setLastname(userInfo.getString(LASTNAME));
         }
-        String lastname = userInfo.getString(LASTNAME);
-        if (lastname != null) {
-            blueshiftUserInfo.setLastname(lastname);
-        }
-        String gender = userInfo.getString(GENDER);
-        if (gender != null) {
-            blueshiftUserInfo.setGender(gender);
+        if (userInfo.hasKey(GENDER)) {
+            blueshiftUserInfo.setGender(userInfo.getString(GENDER));
         }
         if (userInfo.hasKey(JOINED_AT)) {
             blueshiftUserInfo.setJoinedAt(userInfo.getInt(JOINED_AT));
         }
-        String facebookId = userInfo.getString(FACEBOOK_ID);
-        if (facebookId != null) {
-            blueshiftUserInfo.setFacebookId(facebookId);
+        if (userInfo.hasKey(FACEBOOK_ID)) {
+            blueshiftUserInfo.setFacebookId(userInfo.getString(FACEBOOK_ID));
         }
-        String education = userInfo.getString(EDUCATION);
-        if (education != null) {
-            blueshiftUserInfo.setEducation(education);
+        if (userInfo.hasKey(EDUCATION)) {
+            blueshiftUserInfo.setEducation(userInfo.getString(EDUCATION));
         }
         if (userInfo.hasKey(UNSUBSCRIBED)) {
             blueshiftUserInfo.setUnsubscribed(userInfo.getBoolean(UNSUBSCRIBED));
         }
-        ReadableMap details = userInfo.getMap(DETAILS);
-        if (details != null) {
-            blueshiftUserInfo.setDetails(details.toHashMap());
+        if (userInfo.hasKey(DETAILS)) {
+            blueshiftUserInfo.setDetails(userInfo.getMap(DETAILS).toHashMap());
         }
-        ReadableMap dateOfBirth = userInfo.getMap(DATE_OF_BIRTH);
-        if (dateOfBirth != null) {
+        if (userInfo.hasKey(DATE_OF_BIRTH)) {
+            ReadableMap dateOfBirth = userInfo.getMap(DATE_OF_BIRTH);
             blueshiftUserInfo.setDateOfBirth(
                     dateOfBirth.getInt(BIRTH_DAY),
                     dateOfBirth.getInt(BIRTH_MONTH),

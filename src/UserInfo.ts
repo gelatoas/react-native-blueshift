@@ -6,7 +6,6 @@ export interface DateOfBirth {
 
 export interface UserInfo {
   email?: string;
-  email_hash?: string;
   retailer_customer_id?: string;
   name?: string;
   firstname?: string;
