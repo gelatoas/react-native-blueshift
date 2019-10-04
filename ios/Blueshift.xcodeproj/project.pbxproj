@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2A9B2F622347244C0086859D /* Blueshift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A9B2F612347244C0086859D /* Blueshift.swift */; };
 		B3E7B58A1CC2AC0600A0062D /* Blueshift.m in Sources */ = {isa = PBXBuildFile; fileRef = B3E7B5891CC2AC0600A0062D /* Blueshift.m */; };
 /* End PBXBuildFile section */
 
@@ -24,7 +25,8 @@
 
 /* Begin PBXFileReference section */
 		134814201AA4EA6300B7C361 /* libBlueshift.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libBlueshift.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		B3E7B5881CC2AC0600A0062D /* Blueshift.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Blueshift.h; sourceTree = "<group>"; };
+		2A9B2F602347244C0086859D /* Blueshift-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Blueshift-Bridging-Header.h"; sourceTree = "<group>"; };
+		2A9B2F612347244C0086859D /* Blueshift.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Blueshift.swift; sourceTree = "<group>"; };
 		B3E7B5891CC2AC0600A0062D /* Blueshift.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Blueshift.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -50,8 +52,9 @@
 		58B511D21A9E6C8500147676 = {
 			isa = PBXGroup;
 			children = (
-				B3E7B5881CC2AC0600A0062D /* Blueshift.h */,
+				2A9B2F612347244C0086859D /* Blueshift.swift */,
 				B3E7B5891CC2AC0600A0062D /* Blueshift.m */,
+				2A9B2F602347244C0086859D /* Blueshift-Bridging-Header.h */,
 				134814211AA4EA7D00B7C361 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -87,6 +90,7 @@
 				TargetAttributes = {
 					58B511DA1A9E6C8500147676 = {
 						CreatedOnToolsVersion = 6.1.1;
+						LastSwiftMigration = 1100;
 					};
 				};
 			};
@@ -95,6 +99,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 			);
 			mainGroup = 58B511D21A9E6C8500147676;
@@ -112,6 +117,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2A9B2F622347244C0086859D /* Blueshift.swift in Sources */,
 				B3E7B58A1CC2AC0600A0062D /* Blueshift.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -215,6 +221,7 @@
 		58B511F01A9E6C8500147676 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
@@ -222,16 +229,21 @@
 					"$(SRCROOT)/../../react-native/React/**",
 					"$(SRCROOT)/../../../ios/Pods/BlueShift-iOS-SDK/**",
 				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = Blueshift;
 				SKIP_INSTALL = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "Blueshift-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
 		58B511F11A9E6C8500147676 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
@@ -239,10 +251,13 @@
 					"$(SRCROOT)/../../react-native/React/**",
 					"$(SRCROOT)/../../../ios/Pods/BlueShift-iOS-SDK/**",
 				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = Blueshift;
 				SKIP_INSTALL = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "Blueshift-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};
