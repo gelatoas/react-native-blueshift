@@ -1,4 +1,4 @@
-package com.reactlibrary;
+package com.gelato.react.blueshift;
 
 import com.blueshift.Blueshift;
 import com.blueshift.model.UserInfo;
