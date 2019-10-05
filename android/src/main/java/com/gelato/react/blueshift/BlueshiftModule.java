@@ -45,9 +45,8 @@ public class BlueshiftModule extends ReactContextBaseJavaModule {
     public void setUserInfo(ReadableMap userInfo) {
         UserInfo blueshiftUserInfo = UserInfo.getInstance(reactContext);
 
-        String email = userInfo.getString(EMAIL);
-        if (email != null) {
-            blueshiftUserInfo.setEmail(email);
+        if (userInfo.hasKey(EMAIL) {
+            blueshiftUserInfo.setEmail(userInfo.getString(EMAIL));
         }
         if (userInfo.hasKey(RETAILER_CUSTOMER_ID)) {
             blueshiftUserInfo.setRetailerCustomerId(userInfo.getString(RETAILER_CUSTOMER_ID));
