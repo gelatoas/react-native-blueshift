@@ -31,6 +31,8 @@ public class BlueshiftModule extends ReactContextBaseJavaModule {
     private static final String BIRTH_YEAR = "birth_year";
     private static final String SKU = "sku";
     private static final String CATEGORY_ID = "categoryId";
+    private static final String QUANTITY = "quantity";
+
     private final ReactApplicationContext reactContext;
 
     BlueshiftModule(ReactApplicationContext reactContext) {
@@ -119,7 +121,7 @@ public class BlueshiftModule extends ReactContextBaseJavaModule {
 
     @ReactMethod
     public void trackScreenView(final String screenName,
-                           final boolean canBatchThisEvent) {
+                                final boolean canBatchThisEvent) {
         Blueshift.getInstance(reactContext)
                 .trackScreenView(screenName, canBatchThisEvent);
     }
@@ -127,7 +129,7 @@ public class BlueshiftModule extends ReactContextBaseJavaModule {
     @ReactMethod
     public void trackProductView(ReadableMap params,
                                  final boolean canBatchThisEvent) {
-        if(params.hasKey(CATEGORY_ID) && params.hasKey(DETAILS)){
+        if (params.hasKey(CATEGORY_ID) && params.hasKey(DETAILS)) {
             Blueshift.getInstance(reactContext)
                     .trackProductView(
                             params.getString(SKU),
@@ -136,7 +138,7 @@ public class BlueshiftModule extends ReactContextBaseJavaModule {
                             canBatchThisEvent);
             return;
         }
-        if(params.hasKey(CATEGORY_ID)){
+        if (params.hasKey(CATEGORY_ID)) {
             Blueshift.getInstance(reactContext)
                     .trackProductView(
                             params.getString(SKU),
@@ -148,4 +150,22 @@ public class BlueshiftModule extends ReactContextBaseJavaModule {
                 .trackProductView(params.getString(SKU), canBatchThisEvent);
     }
 
+    @ReactMethod
+    public void trackAddToCart(ReadableMap params,
+                               final boolean canBatchThisEvent) {
+        if (params.hasKey(DETAILS)) {
+            Blueshift.getInstance(reactContext)
+                    .trackAddToCart(
+                            params.getString(SKU),
+                            params.getInt(QUANTITY),
+                            params.getMap(DETAILS).toHashMap(),
+                            canBatchThisEvent);
+            return;
+        }
+        Blueshift.getInstance(reactContext)
+                .trackAddToCart(
+                        params.getString(SKU),
+                        params.getInt(QUANTITY),
+                        canBatchThisEvent);
+    }
 }

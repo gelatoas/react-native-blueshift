@@ -1,6 +1,7 @@
 import { NativeModules } from 'react-native';
 import { UserInfo } from './src/UserInfo';
 import { ProductViewParams } from './src/ProductView';
+import { AddToCartParams } from './src/AddToCart';
 
 const { Blueshift } = NativeModules;
 
@@ -22,6 +23,10 @@ export const trackScreenView = (screenName: string, canBatchThisEvent = true) =>
 
 export const trackProductView = (productViewParams: ProductViewParams, canBatchThisEvent = true) => {
   Blueshift.trackProductView(productViewParams, canBatchThisEvent)
+};
+
+export const trackAddToCart = (addToCartParams: AddToCartParams, canBatchThisEvent = true) => {
+  Blueshift.trackProductView(addToCartParams, canBatchThisEvent)
 };
 
 export default Blueshift;
