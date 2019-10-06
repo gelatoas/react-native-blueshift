@@ -1,16 +1,19 @@
 package com.gelato.react.blueshift;
 
 import com.blueshift.Blueshift;
+import com.blueshift.model.Product;
 import com.blueshift.model.UserInfo;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
+import com.facebook.react.bridge.ReadableArray;
 import com.facebook.react.bridge.ReadableMap;
 import com.google.android.gms.ads.identifier.AdvertisingIdClient;
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
 import com.google.android.gms.common.GooglePlayServicesRepairableException;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class BlueshiftModule extends ReactContextBaseJavaModule {
 
@@ -32,6 +35,11 @@ public class BlueshiftModule extends ReactContextBaseJavaModule {
     private static final String SKU = "sku";
     private static final String CATEGORY_ID = "categoryId";
     private static final String QUANTITY = "quantity";
+    public static final String PRODUCTS = "products";
+    public static final String PRICE = "price";
+    public static final String REVENUE = "revenue";
+    public static final String DISCOUNT = "discount";
+    public static final String COUPON = "coupon";
 
     private final ReactApplicationContext reactContext;
 
@@ -166,6 +174,43 @@ public class BlueshiftModule extends ReactContextBaseJavaModule {
                 .trackAddToCart(
                         params.getString(SKU),
                         params.getInt(QUANTITY),
+                        canBatchThisEvent);
+    }
+
+    @ReactMethod
+    public void trackCheckoutCart(ReadableMap params,
+                                  final boolean canBatchThisEvent) {
+        ReadableArray productsObjects = params.getArray(PRODUCTS);
+        Product[] products = new Product[productsObjects.size()];
+        for (int index = 0; index < productsObjects.size(); index++) {
+            ReadableMap productObject = productsObjects.getMap(index);
+            Product product = new Product();
+            product.setSku(productObject.getString(SKU));
+            product.setPrice((float) productObject.getDouble(PRICE));
+            product.setQuantity(productObject.getInt(QUANTITY));
+            products[index] = product;
+        }
+        float revenue = (float) params.getDouble(REVENUE);
+        float discount = (float) params.getDouble(DISCOUNT);
+        String coupon = params.getString(COUPON);
+
+        if (params.hasKey(DETAILS)) {
+            Blueshift.getInstance(reactContext)
+                    .trackCheckoutCart(
+                            products,
+                            revenue,
+                            discount,
+                            coupon,
+                            params.getMap(DETAILS).toHashMap(),
+                            canBatchThisEvent);
+            return;
+        }
+        Blueshift.getInstance(reactContext)
+                .trackCheckoutCart(
+                        products,
+                        revenue,
+                        discount,
+                        coupon,
                         canBatchThisEvent);
     }
 }
