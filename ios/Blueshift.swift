@@ -1,4 +1,5 @@
 import Foundation
+import BlueShift_iOS_SDK
 
 @objc(Blueshift)
 class Blueshift: NSObject {
