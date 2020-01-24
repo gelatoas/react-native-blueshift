@@ -64,7 +64,7 @@ dependencies {
     //noinspection GradleDynamicVersion
     implementation 'com.facebook.react:react-native:+'  // From node_modules
     // BlueShift Android SDK
-    implementation 'com.blueshift:android-sdk:2.1.1'
+    implementation 'com.blueshift:android-sdk:3.0.4'
 }
 
 def configureReactNativePom(def pom) {
