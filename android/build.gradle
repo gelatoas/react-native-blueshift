@@ -14,7 +14,7 @@ buildscript {
             jcenter()
         }
         dependencies {
-            classpath 'com.android.tools.build:gradle:3.4.1'
+            classpath 'com.android.tools.build:gradle:4.0.0'
         }
     }
 }
@@ -64,7 +64,9 @@ dependencies {
     //noinspection GradleDynamicVersion
     implementation 'com.facebook.react:react-native:+'  // From node_modules
     // BlueShift Android SDK
-    implementation 'com.blueshift:android-sdk:3.0.4'
+    implementation "com.google.android.gms:play-services-basement:17.6.0"
+
+    implementation 'com.blueshift:android-sdk:3.1.8'
 }
 
 def configureReactNativePom(def pom) {

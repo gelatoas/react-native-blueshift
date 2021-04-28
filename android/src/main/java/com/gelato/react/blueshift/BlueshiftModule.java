@@ -3,17 +3,12 @@ package com.gelato.react.blueshift;
 import com.blueshift.Blueshift;
 import com.blueshift.model.Product;
 import com.blueshift.model.UserInfo;
+import com.blueshift.util.DeviceUtils;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.ReadableArray;
 import com.facebook.react.bridge.ReadableMap;
-import com.google.android.gms.ads.identifier.AdvertisingIdClient;
-import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
-import com.google.android.gms.common.GooglePlayServicesRepairableException;
-
-import java.io.IOException;
-import java.util.ArrayList;
 
 public class BlueshiftModule extends ReactContextBaseJavaModule {
 
@@ -113,18 +108,9 @@ public class BlueshiftModule extends ReactContextBaseJavaModule {
     @ReactMethod
     public void identify(ReadableMap details,
                          final boolean canBatchThisEvent) {
-        String advertisingId = "";
-        try {
-            advertisingId = AdvertisingIdClient.getAdvertisingIdInfo(reactContext).getId();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (GooglePlayServicesNotAvailableException e) {
-            e.printStackTrace();
-        } catch (GooglePlayServicesRepairableException e) {
-            e.printStackTrace();
-        }
-        Blueshift.getInstance(reactContext)
-                .identifyUserByDeviceId(advertisingId, details.toHashMap(), canBatchThisEvent);
+        String deviceId = DeviceUtils.getDeviceId(reactContext);
+
+        Blueshift.getInstance(reactContext).identifyUserByDeviceId(deviceId, details.toHashMap(), canBatchThisEvent);
     }
 
     @ReactMethod
